@@ -1,1 +1,1 @@
-# Code_for_MIMO_VLC-RC_SMP_SM-
+# Code_for_MIMO_VLC_RC_SMP_SM
