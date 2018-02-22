@@ -11,7 +11,6 @@
 #include "Resources.h"
 #include <iostream>
 
-using namespace std;
 Resources :: Resources() 
 {
 
@@ -25,25 +24,25 @@ Resources :: ~Resources()
 //Function: All initialization is written in here, e.g., memory allocation, variables initialzation.
 void Resources :: Initialization()
 {
-	//One question left to be addressed: if assign *seed directly will cause the BUS ERROR 10!!
-	seed = new int[1];
-	*seed = (int) time(NULL);
+	//One question left to be addressed: if assign *m_seed directly will cause the BUS ERROR 10!!
+	m_seed = new int[1];
+	*m_seed = (int) time(NULL);
 	cout << "Resources has been initialzed!!\n";
 	return;
 
 }
 void Resources :: FreeMemory()
 {
-	delete []seed;
+	delete []m_seed;
 	return;
 }
 
 double Resources :: uniform_0_1()
 {
 	double val = 0.0;
-	*seed = 2045 * (*seed) + 1;
-	*seed = *seed - (*seed / 1048576) * 1048576;
-	val = (*seed) / 1048576.0;
+	*m_seed = 2045 * (*m_seed) + 1;
+	*m_seed = *m_seed - (*m_seed / 1048576) * 1048576;
+	val = (*m_seed) / 1048576.0;
 	return val;
 }
 
@@ -71,6 +70,66 @@ void Resources :: getGaussNoiseVec(const int len, double* GaussNoiseVec)
 	return;
 }
 
+void Resources :: clc()
+{
+	m_err_bits = 0;
+	m_simu_bits = 0;
+	m_err_block = 0;
+	return;
+}
 
+void Resources :: CalculateBER(int *bb, int *bb_hat, int len_bb)
+{
+	for(int i = 0; i < len_bb; ++i)
+	{
+		if(bb[i] != bb_hat[i])
+		{
+			m_err_bits += 1;
+		}
+		
+	}
+	m_simu_bits += len_bb;
+	m_ber = m_err_bits / m_simu_bits;
+	return;
+}
 
+void Resources :: PrintResult(char *Modem_file_name)
+{
+	sprintf(Result_file_name, "Result of %s", Modem_file_name);
+	FILE *fp;
+	if(( fp = fopen(Result_file_name, "a+") ) == NULL)
+	{
+		printf("The file of %s can not be opened!\n", Result_file_name);
+		exit(1);
 
+	}
+	string  time = getTime();
+	fprintf(fp, "\n\nThis simulation starts at %s\n", time.c_str());
+	fprintf(fp, "This result is related to [%s]\n", Result_file_name);
+	fprintf(fp, "SNR      BER\n");
+	fclose(fp);
+	return;
+}
+
+void Resources :: PrintResult(double snr)
+{
+	FILE *fp;
+	if(( fp = fopen(Result_file_name, "a+") ) == NULL)
+	{
+		printf("The file of %s can not be opened!\n", Result_file_name);
+		exit(1);
+
+	}
+	fprintf(fp, "%-3.1f   %-1.10f\n", snr, m_ber);
+	fclose(fp);		
+	return;
+}
+
+string Resources :: getTime()
+{
+    time_t timep;
+    time (&timep);
+    char tmp[64];
+    strftime(tmp, sizeof(tmp), "%Y-%m-%d %H:%M:%S",localtime(&timep) );
+    return tmp;
+}
