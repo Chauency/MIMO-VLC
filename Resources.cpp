@@ -1,5 +1,5 @@
 /*************************************************************************
-     > Copyright (C) 2018 All rights reserved.
+     > The program can only be employed for academic research.
      > File Name: Resources.cpp
      > Author: Chauency
      > Mail: chauencychan.gmail.com
@@ -25,11 +25,18 @@ Resources :: ~Resources()
 //Function: All initialization is written in here, e.g., memory allocation, variables initialzation.
 void Resources :: Initialization()
 {
-	*seed = (unsigned) time(NULL);
+	//One question left to be addressed: if assign *seed directly will cause the BUS ERROR 10!!
+	seed = new int[1];
+	*seed = (int) time(NULL);
+	cout << "Resources has been initialzed!!\n";
+	return;
 
 }
-
-
+void Resources :: FreeMemory()
+{
+	delete []seed;
+	return;
+}
 
 double Resources :: uniform_0_1()
 {
@@ -59,10 +66,11 @@ void Resources :: getGaussNoiseVec(const int len, double* GaussNoiseVec)
 		{
 			GaussNoiseVec[i] += uniform_0_1();
 		}
-		GaussNoiseVec[i] -= 6.0;		
+		GaussNoiseVec[i] -= 6.0;
 	}
 	return;
 }
+
 
 
 
