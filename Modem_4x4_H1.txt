@@ -1,0 +1,13 @@
+m_Nt
+4
+m_Nr
+4
+m_size_constell
+16
+m_len_per_sym
+4
+Costellation
+1 0 0 0
+0 1 0 0 
+0 0 1 0
+0 0 0 1
