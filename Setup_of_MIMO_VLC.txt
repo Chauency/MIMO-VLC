@@ -1,0 +1,15 @@
+min_snr
+0
+max_snr
+10
+arc_snr
+0.5
+max_bolck
+1000
+m_len_bb
+2560
+
+Modem_file
+Modem_4x4_H1.txt
+
+NOTE:
