@@ -13,6 +13,7 @@
 #include <iostream>
 #include "Resources.h"
 #include "Modem.h"
+#include <cmath>
 using namespace std;
 class MIMO_VLC
 {
@@ -21,7 +22,7 @@ public:
 	//Pointer type members
 	int *m_bb;//Information bit vector
 	int *m_cc;//Encoded bit vector
-	int *m_xx;//Modulated signal vector
+	double *m_xx;//Modulated signal vector
 	double *m_yy;//Received signal vector
 	double *m_nn;//Noise vector
 	double *m_yy_prob;//Demodulated symbol probability
@@ -39,21 +40,17 @@ public:
 	char m_Modem_file_name[100];
 
 	int m_max_block;
-
+	double m_var, m_sigma;
 
 	//Type of class member
 	Resources m_source;
 	Modem m_modem;
-
-
 
 	MIMO_VLC();
 	~MIMO_VLC();
 	void Initialization();
 	void Simulation();
 	void FreeMemory();
-
-	
 };
 
 
