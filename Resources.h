@@ -35,7 +35,8 @@ public:
 	void CalculateBER(int *bb, int *bb_hat, int len_bb);
 	void PrintResult(char *Modem_file_name);
 	void PrintResult(double snr);
-	void PrintTempResult();
+	void PrintResult2Terminal(int simu_blocks, double snr);
+	void PrintResult2Terminal(char *Modem_file_name);
 
 
 

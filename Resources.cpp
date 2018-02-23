@@ -27,7 +27,7 @@ void Resources :: Initialization()
 	//One question left to be addressed: if assign *m_seed directly will cause the BUS ERROR 10!!
 	m_seed = new int[1];
 	*m_seed = (int) time(NULL);
-	cout << "Resources has been initialzed!!\n";
+	//cout << "Resources has been initialzed!!\n";
 	return;
 
 }
@@ -120,8 +120,23 @@ void Resources :: PrintResult(double snr)
 		exit(1);
 
 	}
-	fprintf(fp, "%-3.1f   %-1.10f\n", snr, m_ber);
+	fprintf(fp, "%-3.2f   %-1.10f\n", snr, m_ber);
 	fclose(fp);		
+	return;
+}
+
+void Resources :: PrintResult2Terminal(int simu_blocks, double snr)
+{
+	printf("snr = %-3.2f  ber = %-1.4e  simu_blocks = %-d  err_bits = %-.0f\n", snr, m_ber, simu_blocks, m_err_bits);
+	return;
+}
+
+void Resources :: PrintResult2Terminal(char *Modem_file_name)
+{
+	string  time = getTime();
+	printf("\n-------------------****Enjoy Coding****-------------------\n");
+	printf("This simulation starts at %s\n", time.c_str());
+	printf("This result is related to [%s]\n", Result_file_name);
 	return;
 }
 
