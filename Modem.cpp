@@ -56,7 +56,7 @@ void Modem :: Initialization(char *Modem_file_name)
 		}
 	}
 	fclose(fp);
-	cout << "Modem input is success!\n";
+	//cout << "Modem input is success!\n";
 	int int_temp = 1, count_1 = 0;
 	m_num_bit_per_sym = 0;
 	while(int_temp < m_size_constell)
@@ -81,8 +81,8 @@ void Modem :: Initialization(char *Modem_file_name)
 	}
 	m_num_sym_per_xx = m_len_cc / m_num_bit_per_sym;
 	m_num_sym_per_yy = m_num_sym_per_xx;
-	cout << "Modem has been initilized!!\n";
-	cout << "m_num_sym_per_xx " << m_num_sym_per_xx << endl;
+	//cout << "Modem has been initilized!!\n";
+	//cout << "m_num_sym_per_xx " << m_num_sym_per_xx << endl;
 	return;
 }
 void Modem :: FreeMemory()

@@ -127,6 +127,10 @@ void Resources :: PrintResult(double snr)
 
 void Resources :: PrintResult2Terminal(int simu_blocks, double snr)
 {
+	if(simu_blocks == 1)
+	{
+		printf("\n");
+	}
 	printf("snr = %-3.2f  ber = %-1.4e  simu_blocks = %-d  err_bits = %-.0f\n", snr, m_ber, simu_blocks, m_err_bits);
 	return;
 }
