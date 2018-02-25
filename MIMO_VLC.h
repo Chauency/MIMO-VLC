@@ -14,6 +14,7 @@
 #include "Resources.h"
 #include "Modem.h"
 #include <cmath>
+#define DEG 0
 using namespace std;
 class MIMO_VLC
 {
